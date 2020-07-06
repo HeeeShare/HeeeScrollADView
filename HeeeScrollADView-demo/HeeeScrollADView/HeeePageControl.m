@@ -8,7 +8,7 @@
 
 #define disSelectWidth 10
 #define selectWidth 20
-#define height 5
+#define indicatorHeight 5
 #define gap 8
 
 #import "HeeePageControl.h"
@@ -63,8 +63,8 @@
     
     for (UIView *view in _indicatorArr) {
         if (view != firstView && view != nextView) {
-            if (view.heee_width != disSelectWidth) {
-                view.heee_width = disSelectWidth;
+            if (view.width != disSelectWidth) {
+                view.width = disSelectWidth;
             }
             
             if (view.backgroundColor != _pageIndicatorTintColor) {
@@ -73,18 +73,18 @@
         }
     }
     
-    firstView.heee_width = selectWidth - (selectWidth - disSelectWidth)*rate;
-    nextView.heee_width = disSelectWidth + (selectWidth - disSelectWidth)*rate;
+    firstView.width = selectWidth - (selectWidth - disSelectWidth)*rate;
+    nextView.width = disSelectWidth + (selectWidth - disSelectWidth)*rate;
     
     [self changeColorWithFirstView:firstView nextView:nextView andRate:rate];
     
     for (NSUInteger i = 0; i < _indicatorArr.count; i++) {
         UIView *view0 = _indicatorArr[i];
         if (i == 0) {
-            view0.heee_left = 0;
+            view0.left = 0;
         }else{
             UIView *view1 = _indicatorArr[i-1];
-            view0.heee_left = view1.heee_right + gap;
+            view0.left = view1.right + gap;
         }
     }
 }
@@ -116,22 +116,22 @@
         CGFloat x = 0;
         
         for (NSUInteger i = 0; i < numberOfPages; i++) {
-            UIView *indicatorView = [[UIView alloc] initWithFrame:CGRectMake(x, 0, disSelectWidth, height)];
+            UIView *indicatorView = [[UIView alloc] initWithFrame:CGRectMake(x, 0, disSelectWidth, indicatorHeight)];
             indicatorView.backgroundColor = _pageIndicatorTintColor;
-            indicatorView.heee_centerY = _clearBackView.heee_height/2;
+            indicatorView.centerY = _clearBackView.height/2;
             if (_currentPage == i) {
                 indicatorView.backgroundColor = _currentPageIndicatorTintColor;
-                indicatorView.heee_width = selectWidth;
+                indicatorView.width = selectWidth;
             }
             
-            x = indicatorView.heee_right + gap;
-            indicatorView.layer.cornerRadius = height/2.0;
+            x = indicatorView.right + gap;
+            indicatorView.layer.cornerRadius = indicatorHeight/2.0;
             [_indicatorArr addObject:indicatorView];
             [_clearBackView addSubview:indicatorView];
-            _clearBackView.heee_width = indicatorView.heee_right;
+            _clearBackView.width = indicatorView.right;
         }
         
-        _clearBackView.heee_centerX = self.heee_width/2;
+        _clearBackView.centerX = self.width/2;
     }
 }
 
