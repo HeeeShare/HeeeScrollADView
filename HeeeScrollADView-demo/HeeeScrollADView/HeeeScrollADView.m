@@ -79,12 +79,14 @@
             _customPageControl.hidden = YES;
             
             urlStr = _urlArr.firstObject;
-            UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+            UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(self.pageGap/2, 0, self.frame.size.width - self.pageGap, self.frame.size.height)];
             btn.imageView.contentMode = UIViewContentModeScaleAspectFill;
+            btn.layer.cornerRadius = self.pageCornerRadius;
+            btn.layer.masksToBounds = YES;
             btn.tag = 100;
             btn.adjustsImageWhenHighlighted = NO;
             [btn addTarget:self action:@selector(btnClick:) forControlEvents:(UIControlEventTouchUpInside)];
-            [btn sd_setImageWithURL:[NSURL URLWithString:urlStr] forState:(UIControlStateNormal)];
+            [btn sd_setImageWithURL:[NSURL URLWithString:urlStr] forState:(UIControlStateNormal) placeholderImage:_placeholderImage];
             [_scrollView addSubview:btn];
         }else{
             if (_urlArr.count < _currentPage) {
@@ -95,8 +97,10 @@
             _customPageControl.hidden = NO;
             
             for (NSUInteger i = 0; i < _totalBtnCount; i++) {
-                UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width*i, 0, self.frame.size.width, self.frame.size.height)];
+                UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width*i + self.pageGap/2, 0, self.frame.size.width - self.pageGap, self.frame.size.height)];
                 btn.imageView.contentMode = UIViewContentModeScaleAspectFill;
+                btn.layer.cornerRadius = self.pageCornerRadius;
+                btn.layer.masksToBounds = YES;
                 btn.tag = 100 + i;
                 [btn addTarget:self action:@selector(btnClick:) forControlEvents:(UIControlEventTouchUpInside)];
                 btn.adjustsImageWhenHighlighted = NO;
@@ -108,7 +112,7 @@
                     urlStr = _urlArr[i - 1];
                 }
                 
-                [btn sd_setImageWithURL:[NSURL URLWithString:urlStr] forState:(UIControlStateNormal)];
+                [btn sd_setImageWithURL:[NSURL URLWithString:urlStr] forState:(UIControlStateNormal) placeholderImage:_placeholderImage];
                 [_scrollView addSubview:btn];
                 _scrollView.contentSize = CGSizeMake(_totalBtnCount*self.frame.size.width, 0);
             }

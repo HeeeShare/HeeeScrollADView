@@ -126,6 +126,8 @@
             
             x = indicatorView.right + gap;
             indicatorView.layer.cornerRadius = indicatorHeight/2.0;
+            indicatorView.layer.borderColor = [UIColor colorWithWhite:0 alpha:0.1].CGColor;
+            indicatorView.layer.borderWidth = 0.5;
             [_indicatorArr addObject:indicatorView];
             [_clearBackView addSubview:indicatorView];
             _clearBackView.width = indicatorView.right;
