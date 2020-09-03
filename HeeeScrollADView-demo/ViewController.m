@@ -23,9 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _scrollADView = [[HeeeScrollADView alloc] initWithFrame:CGRectMake(0, 80, self.view.frame.size.width, self.view.frame.size.width*9/16.0)];
-    _scrollADView.pageGap = 20;
-    _scrollADView.pageCornerRadius = 12;
+    _scrollADView = [[HeeeScrollADView alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.width*9/16.0)];
     _scrollADView.urlArr = @[url0,url1,url2,url3];
     [self.view addSubview:_scrollADView];
 }
