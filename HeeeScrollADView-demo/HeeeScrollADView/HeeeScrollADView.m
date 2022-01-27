@@ -91,6 +91,7 @@
             [btn addTarget:self action:@selector(btnClick:) forControlEvents:(UIControlEventTouchUpInside)];
             [btn sd_setImageWithURL:[NSURL URLWithString:urlStr] forState:(UIControlStateNormal) placeholderImage:_placeholderImage];
             [_scrollView addSubview:btn];
+            [self handleScrollToWhichPage:0];
         }else{
             if (_urlArr.count < _currentPage) {
                 _currentPage = 0;
@@ -230,6 +231,9 @@
             index = index - 1;
         }
         
+        if (_totalBtnCount == 1) {
+            index = 1;
+        }
         _currentPage = index;
         
         if (_delegate && [_delegate respondsToSelector:@selector(scrollADView:didScrollToIndex:)]) {
